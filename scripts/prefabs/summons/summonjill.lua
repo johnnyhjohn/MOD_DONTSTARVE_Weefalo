@@ -66,6 +66,7 @@ local sounds =
     swish = "dontstarve/beefalo/tail_swish",
     curious = "dontstarve/beefalo/curious",
     angry = "dontstarve/beefalo/angry",
+    sleep = "dontstarve/beefalo/sleep",
 }
 
 ------------------------------------------
