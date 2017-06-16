@@ -19,8 +19,7 @@ local prefabs = {}
 ------------------------------------------
 -- Itens iniciais de inventario
 ------------------------------------------
-local start_inv = {
-    "jaostaff", 
+local start_inv = { 
     "summonhorn"
 }
 

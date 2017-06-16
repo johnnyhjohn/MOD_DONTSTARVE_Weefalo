@@ -624,7 +624,6 @@ local function beefalo()
     inst.components.mood:Enable(false)
     ------------------------------------------
     inst:AddComponent("inventory")
-    -- inst:AddComponent("followersitcommand")
     DomesticationAndObedienceTotal(inst)
     ------------------------------------------
     MakeLargeBurnableCharacter(inst, "beefalo_body")

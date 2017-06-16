@@ -24,14 +24,29 @@ end
 local function onUse( inst, musician, instrument )
     if(musician.daysLeft == 0) then
         local x, y, z = musician.Transform:GetWorldPosition()
-        local beefalo = SpawnPrefab("beefalo")
-        
-        beefalo.components.domesticatable:DeltaTendency("PUDGY", 1)
-        beefalo:SetTendency()
-        beefalo.components.domesticatable.domestication = 1
-        beefalo.components.domesticatable:BecomeDomesticated()
-        beefalo.Transform:SetPosition(x, y, z)
-        musician.daysLeft = 3
+        local beefaloAge = math.random(1,5)
+        if beefaloAge == 4 then
+            local beefalo = SpawnPrefab("babybeefalo")
+            beefalo.Transform:SetPosition(x, y, z)
+            musician.daysLeft = 3
+        else
+            local beefalo = SpawnPrefab("beefalo")
+            local beefaloType = math.random(1,4)
+
+            local beefaloToGenerate = {
+                "PUDGY",
+                "RIDER",
+                "ORNERY",
+                "DEFAULT"
+            }
+
+            beefalo.components.domesticatable:DeltaTendency(tostring(beefaloToGenerate[beefaloType]), 1)
+            beefalo:SetTendency()
+            beefalo.components.domesticatable.domestication = 1
+            beefalo.components.domesticatable:BecomeDomesticated()
+            beefalo.Transform:SetPosition(x, y, z)
+            musician.daysLeft = 3
+        end
     else
         musician.components.talker:Say("Tenho que esperar mais " .. (musician.daysLeft) .. " dias")
     end
@@ -68,15 +83,14 @@ local function fn()
     inst:AddComponent("inspectable")
     inst:AddComponent("instrument")
     inst.components.instrument.range = TUNING.HORN_RANGE
-    -- inst.components.instrument:SetOnHeardFn(useHorn)
 
     inst:AddComponent("tool")
     inst.components.tool:SetAction(ACTIONS.PLAY)
     inst.components.instrument:SetOnPlayedFn(onUse)
+    
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.keepondeath = true
-    inst.components.inventoryitem.imagename = "horn"
-    --inst.components.inventoryitem:SetOnActiveItemFn(onUse)
+    inst.components.inventoryitem.keepondeath   = true
+    inst.components.inventoryitem.imagename     = "horn"
 
     MakeHauntableLaunch(inst)
 

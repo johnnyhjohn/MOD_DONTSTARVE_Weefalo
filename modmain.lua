@@ -27,9 +27,7 @@ use "data/components/init"
 ------------------------------------------
 PrefabFiles = 
 {
-    "jao", 
-    "jaostaff",        
-    "sourceofmagic",
+    "jao",
     "summons/summonjill",
     'summonhorn'
 }
@@ -60,9 +58,6 @@ Assets =
     Asset( "IMAGE", "images/avatars/avatar_ghost_jao.tex" ),
     Asset( "ATLAS", "images/avatars/avatar_ghost_jao.xml" ),
     ------------------------------------------
-    Asset("ATLAS", "images/hud/magictab.xml"),
-    Asset("IMAGE", "images/hud/magictab.tex"),
-    ------------------------------------------
     Asset( "IMAGE", "images/inventoryimages/summons/summonjill.tex" ),
     Asset( "ATLAS", "images/inventoryimages/summons/summonjill.xml" ),
     ------------------------------------------
@@ -82,23 +77,12 @@ local HUNT = GLOBAL.Action(4, true, true, 10,	false, false, nil)
 ------------------------------------------
 local petSpeech = require "speech_pets"
 local SPEECHBR = petSpeech.SPEECH_PETS.PORTUGUES
-local SPEECHEN = petSpeech.SPEECH_PETS.ENGLISH
 
 ------------------------------------------
 -- Variaveis Recebidas do ModInfo
 ------------------------------------------
 GLOBAL.TUNING.JAO = {}
 GLOBAL.TUNING.JAO.LANG  = GetModConfigData("lang")
-GLOBAL.TUNING.JAO.KEYF1 = 282
-GLOBAL.TUNING.JAO.KEYF2 = 283
-GLOBAL.TUNING.JAO.KEYF3 = 284
-GLOBAL.TUNING.JAO.KEYF4 = 285
-GLOBAL.TUNING.JAO.KEYF5 = 286
-GLOBAL.TUNING.JAO.KEYZ  = 122
-GLOBAL.TUNING.JAO.KEYX  = 120
-GLOBAL.TUNING.JAO.KEYC  = 99
-GLOBAL.TUNING.JAO.KEYV  = 118
-GLOBAL.TUNING.JAO.KEYB  = 98
  
  GLOBAL.TUNING.JAO.GROUNDTEST1 = GLOBAL.GROUND.IMPASSABLE
  GLOBAL.TUNING.JAO.GROUNDTEST2 = GLOBAL.GROUND.INVALID;
@@ -109,7 +93,6 @@ GLOBAL.TUNING.JAO.KEYB  = 98
 ------------------------------------------
 local SPEECH = SPEECHBR
 GLOBAL.TUNING.JAO.SPEECH  = SPEECH
-
 
 ------------------------------------------
 -- Respostas Jill
@@ -144,12 +127,12 @@ AddModRPCHandler("jao", "infoJill", sayJillInfo )
 ------------------------------------------
 -- Codigo da aba de receitas
 ------------------------------------------
-local recipe_tab = AddRecipeTab("Invocations and Spells", 999, "images/hud/magictab.xml", "magictab.tex", "jaobuilder" )
+-- local recipe_tab = AddRecipeTab("Invocations and Spells", 999, "images/hud/magictab.xml", "magictab.tex", "jaobuilder" )
 ------------------------------------------
 -- Receitas do Café
 ------------------------------------------
-local recipe_coffee = AddRecipe("seeds", {Ingredient("seeds", 2), Ingredient("poop", 1)}, recipe_tab, TECH.NONE)						
-recipe_coffee.builder_tag = "jaobuilder"
+-- local recipe_coffee = AddRecipe("seeds", {Ingredient("seeds", 2), Ingredient("poop", 1)}, recipe_tab, TECH.NONE)						
+-- recipe_coffee.builder_tag = "jaobuilder"
 ------------------------------------------
 -- Receita para invoca o Jill
 ------------------------------------------
@@ -164,31 +147,15 @@ summonjill_recipe.atlas = resolvefilepath("images/inventoryimages/summons/summon
 ------------------------------------------
 STRINGS.CHARACTER_TITLES.jao = "The Beefalo's King"
 STRINGS.CHARACTER_NAMES.jao = "Weefalo"
-STRINGS.CHARACTER_DESCRIPTIONS.jao = "*A King\n*Has Mount\n*Beefalo's King"
+STRINGS.CHARACTER_DESCRIPTIONS.jao = "*A King\n*Has a Mount\n*Beefalo's King"
 STRINGS.CHARACTER_QUOTES.jao = "\"I think I need a Coffee!\""
 
 ------------------------------------------
--- Dados do cajado
-------------------------------------------
-GLOBAL.STRINGS.NAMES.JAOSTAFF = "Jao's Staff"
-GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.JAOSTAFF = "Teleportation source, light and fire Jão"
-
-------------------------------------------
--- Dados do cajado
+-- Dados do Horn
 ------------------------------------------
 GLOBAL.STRINGS.NAMES.SUMMONHORN = "Summon Horn"
 GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.SUMMONHORN = "On Play that horn, Weefalo can Summon others Beefalo's"
-
 ------------------------------------------
--- Dados do item
-------------------------------------------
-GLOBAL.STRINGS.NAMES.SOURCEOFMAGIC = "The Source of Magic"
-GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.SOURCEOFMAGIC = "Grants power of invocation of John!"
-
--- Dados do item
-------------------------------------------
-GLOBAL.STRINGS.NAMES.SOURCEOFMAGIC = "The Source of Magic"
-GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.SOURCEOFMAGIC = "Grants power of invocation of Jao!"
 -- Dados do Jill
 ------------------------------------------
 GLOBAL.STRINGS.NAMES.SUMMONJILL = "Jill"
