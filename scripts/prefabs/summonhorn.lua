@@ -25,26 +25,37 @@ local function onUse( inst, musician, instrument )
     if(musician.daysLeft == 0) then
         local x, y, z = musician.Transform:GetWorldPosition()
         local beefaloAge = math.random(1,5)
-        if beefaloAge == 4 then
-            local beefalo = SpawnPrefab("babybeefalo")
-            beefalo.Transform:SetPosition(x, y, z)
-            musician.daysLeft = 3
+        if musician.jillInvocado == true then
+            if beefaloAge == 4 then
+                local beefalo = SpawnPrefab("babybeefalo")
+                beefalo.Transform:SetPosition(x, y, z)
+                musician.daysLeft = 3
+            else
+                local beefalo = SpawnPrefab("beefalo")
+                local beefaloType = math.random(1,4)
+
+                local beefaloToGenerate = {
+                    "DEFAULT",
+                    "RIDER",
+                    "ORNERY",
+                    "PUDGY"
+                }
+
+                beefalo.components.domesticatable:DeltaTendency(tostring(beefaloToGenerate[beefaloType]), 1)
+                beefalo:SetTendency()
+                beefalo.components.domesticatable.domestication = 1
+                beefalo.components.domesticatable:BecomeDomesticated()
+                beefalo.Transform:SetPosition(x, y, z)
+                musician.daysLeft = 3
+            end
         else
-            local beefalo = SpawnPrefab("beefalo")
-            local beefaloType = math.random(1,4)
-
-            local beefaloToGenerate = {
-                "PUDGY",
-                "RIDER",
-                "ORNERY",
-                "DEFAULT"
-            }
-
-            beefalo.components.domesticatable:DeltaTendency(tostring(beefaloToGenerate[beefaloType]), 1)
-            beefalo:SetTendency()
-            beefalo.components.domesticatable.domestication = 1
-            beefalo.components.domesticatable:BecomeDomesticated()
-            beefalo.Transform:SetPosition(x, y, z)
+            musician.components.leader:AddFollower(inst, true)
+            ------------------------------------------
+            musician.components.sanity:DoDelta(-25)
+            ------------------------------------------
+            musician.jillInvocado = true
+            ------------------------------------------
+            SpawnPrefab("summonjill").Transform:SetPosition( Point(inst.Transform:GetWorldPosition()):Get() )
             musician.daysLeft = 3
         end
     else
