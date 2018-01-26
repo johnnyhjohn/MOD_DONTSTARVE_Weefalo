@@ -343,10 +343,10 @@ local function SetTendency(inst, changedomestication)
     ------------------------------------------
     if inst.components.domesticatable:IsDomesticated() then
         inst.components.combat:SetDefaultDamage(TUNING.BEEFALO_DAMAGE.DEFAULT+2)
-        inst.components.locomotor.runspeed = 18
+        inst.components.locomotor.runspeed = 10
     else
         inst.components.combat:SetDefaultDamage(TUNING.BEEFALO_DAMAGE.DEFAULT+2)
-        inst.components.locomotor.runspeed = 18
+        inst.components.locomotor.runspeed = 10
     end
     ------------------------------------------
     inst:ApplyBuildOverrides(inst.AnimState)
@@ -454,16 +454,7 @@ local function linkToBuilder(inst, builder)
     local canspawn = tile ~= GROUND.IMPASSABLE and tile ~= GROUND.INVALID
     if not canspawn then point = Point(x, y, z) end
     inst.Transform:SetPosition( (point):Get() )
-    ------------------------------------------
-    local fx = SpawnPrefab("statue_transition")
-    fx.Transform:SetScale(1, 1, 1)
-    fx.Transform:SetPosition(builder:GetPosition():Get())
-    inst.SoundEmitter:PlaySound("dontstarve/sanity/creature2/taunt")
-    ------------------------------------------
-    local xf = SpawnPrefab("statue_transition_2")
-    xf.Transform:SetScale(3, 3, 3)
-    xf.Transform:SetPosition(inst:GetPosition():Get())
-    inst.SoundEmitter:PlaySound("dontstarve/common/deathpoof")    
+   
 end
 
 ------------------------------------------
@@ -609,7 +600,7 @@ local function beefalo()
     ------------------------------------------
     inst:AddComponent("locomotor") 
     inst.components.locomotor.walkspeed = TUNING.BEEFALO_WALK_SPEED+3
-    inst.components.locomotor.runspeed = 13
+    inst.components.locomotor.runspeed = 10
     ------------------------------------------
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(3)
